@@ -56,6 +56,7 @@ func (bfs *buffers) set(key string, value *buffer) {
 func (bfs *buffers) remove(key string) {
 	bfs.Lock()
 	defer bfs.Unlock()
+	close(bfs.bufferMap[key].in)
 	delete(bfs.bufferMap, key)
 }
 
